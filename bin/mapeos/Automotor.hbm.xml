@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+<class name="datos.Automotor" table="automotor">
+    <id column="idAutomotor" name="idAutomotor">
+      <generator class="identity"/>
+    </id>
+    <property column="dominio" name="dominio" type="string"/>
+    <property column="modelo" name="modelo" type="int"/>
+    <property column="marca" name="marca" type="string"/>
+    
+ 
+<many-to-one  name="contrib" class="datos.Contribuyente"
+column="idContribuyente"/>
+
+<set name="listaInspeccion" table="inspeccion" order-by="idInspeccion asc" inverse="true" lazy="true" fetch="select" cascade="save-update">
+<key column="idAutomotor" />
+<one-to-many class="datos.Inspeccion"/>
+</set>
+
+  </class>    
+</hibernate-mapping>
